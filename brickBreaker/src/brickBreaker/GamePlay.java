@@ -1,5 +1,7 @@
 package brickBreaker;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -25,6 +27,35 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 	private int ballposY = 350;
 	private int ballXdir = -1;
 	private int ballYdir = -2;
+
+//	public GamePlay() {
+//		addKeyListener(this);
+//		setFocusable(true);
+//		setFocusTraversalKeysEnabled(false);
+//		timer = new Timer(delay, this);
+//		timer.start();
+//	}
+
+	public void print(Graphics g) {
+
+//		setBackground of game panel
+		g.setColor(Color.white);
+		g.fillRect(1, 1, 692, 592);
+
+//		set border of screen
+		g.setColor(Color.yellow);
+		g.fillRect(0, 0, 3, 562);
+		g.fillRect(0, 0, 692, 3);
+		g.fillRect(691, 0, 3, 592);
+
+//		set padel attributes
+		g.setColor(Color.blue);
+		g.fillRect(playerX, 550, 100, 8);
+
+//		set ball attributes
+		g.setColor(Color.green);
+		g.fillOval(ballposX, ballposY, 20, 20);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
