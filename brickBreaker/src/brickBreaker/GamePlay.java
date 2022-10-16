@@ -1,6 +1,7 @@
 package brickBreaker;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -63,6 +64,37 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 //		set ball attributes
 		g.setColor(Color.green);
 		g.fillOval(ballposX, ballposY, 20, 20);
+
+//		display score
+		g.setColor(Color.black);
+		g.setFont(new Font("serif", Font.BOLD, 25));
+		g.drawString("" + score, 590, 30);
+
+//		game over code
+		if (ballposY > 570) {
+			play = false;
+			ballXdir = 0;
+			ballYdir = 0;
+			g.setColor(Color.red);
+			g.setFont(new Font("serif", Font.BOLD, 30));
+			g.drawString("Game Over, Score : " + score, 190, 350);
+
+			g.setFont(new Font("serif", Font.BOLD, 20));
+			g.drawString("Press Enter to Restart ", 230, 400);
+		}
+
+//		game win code
+		if (totalBricks <= 0) {
+			play = false;
+			ballXdir = 0;
+			ballYdir = 0;
+			g.setColor(Color.green);
+			g.setFont(new Font("serif", Font.BOLD, 30));
+			g.drawString("Awesome. You Did it !!, Score : " + score, 110, 350);
+
+			g.setFont(new Font("serif", Font.BOLD, 20));
+			g.drawString("Press Enter to Restart ", 230, 400);
+		}
 
 		g.dispose();
 	}
@@ -147,6 +179,22 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 				playerX = 10;
 			} else {
 				moveLeft();
+			}
+		}
+		
+		//restart game after enter
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (!play) {
+				play = true;
+//				ballposX = ballposX;
+				ballposY = 350;
+				ballXdir = -1;
+				ballYdir = -2;
+				score = 0;
+				totalBricks = 200;
+				map = new MapGenerator(10, 20);
+				repaint();
+
 			}
 		}
 	}
